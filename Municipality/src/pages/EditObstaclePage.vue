@@ -11,6 +11,7 @@ const router = useRouter();
 const obstacle = ref(null);
 const isLoading = ref(true);
 const isSaving = ref(false);
+const error = ref('');
 
 onMounted(async () => {
   const numericId = Number(route.params.id);
@@ -26,6 +27,8 @@ onMounted(async () => {
       return;
     }
     obstacle.value = found;
+  } catch {
+    error.value = 'Obstakel ophalen is mislukt. Controleer of de backend draait en vernieuw de pagina.';
   } finally {
     isLoading.value = false;
   }
@@ -34,9 +37,12 @@ onMounted(async () => {
 async function handleSave(updatedName) {
   if (!obstacle.value) return;
   isSaving.value = true;
+  error.value = '';
   try {
     await obstacleRepository.update(obstacle.value.id, { name: updatedName });
     router.push('/');
+  } catch {
+    error.value = 'Opslaan is mislukt. Probeer het opnieuw.';
   } finally {
     isSaving.value = false;
   }
@@ -44,14 +50,15 @@ async function handleSave(updatedName) {
 </script>
 
 <template>
+  <p v-if="error" role="alert" class="mx-auto mb-4 max-w-3xl text-sm text-[#B42318]">{{ error }}</p>
   <div
-    v-if="isLoading || !obstacle"
+    v-if="isLoading"
     class="mx-auto max-w-3xl rounded-xl border border-[#E5E5E0] bg-white p-12 text-center text-sm text-[#646660]"
   >
     Obstakelgegevens laden...
   </div>
 
-  <div v-else class="mx-auto max-w-3xl">
+  <div v-else-if="obstacle" class="mx-auto max-w-3xl">
     <RouterLink
       to="/"
       class="inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-[#646660] transition-colors hover:text-[#1C1D1B] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C1D1B]"

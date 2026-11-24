@@ -2,9 +2,12 @@ package nl.hackathondenotenkraker.backend.controller;
 
 import nl.hackathondenotenkraker.backend.dto.ObstacleRequest;
 import nl.hackathondenotenkraker.backend.dto.ObstacleResponse;
+import nl.hackathondenotenkraker.backend.dto.ObstacleUpdateRequest;
 import nl.hackathondenotenkraker.backend.model.Obstacle;
 import nl.hackathondenotenkraker.backend.repository.ObstacleRepository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -36,6 +39,32 @@ public class ObstacleController {
 
         Obstacle savedObstacle = obstacleRepository.save(obstacle);
         return toResponse(savedObstacle);
+    }
+
+    @GetMapping("/{id}")
+    public ObstacleResponse getObstacle(@PathVariable Long id) {
+        return toResponse(findObstacle(id));
+    }
+
+    @PutMapping("/{id}")
+    public ObstacleResponse updateObstacle(@PathVariable Long id, @RequestBody ObstacleUpdateRequest request) {
+        if (request.obstacleType() == null || request.obstacleType().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Obstakelnaam is verplicht");
+        }
+        Obstacle obstacle = findObstacle(id);
+        obstacle.setObstacleType(request.obstacleType().trim());
+        return toResponse(obstacleRepository.save(obstacle));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteObstacle(@PathVariable Long id) {
+        obstacleRepository.delete(findObstacle(id));
+    }
+
+    private Obstacle findObstacle(Long id) {
+        return obstacleRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Obstakel niet gevonden"));
     }
 
     private ObstacleResponse toResponse(Obstacle obstacle) {

@@ -11,12 +11,15 @@ const obstacles = ref([]);
 const selectedId = ref(null);
 const searchQuery = ref('');
 const isLoading = ref(true);
+const error = ref('');
 
 onMounted(async () => {
   try {
     const data = await obstacleRepository.getAll();
     obstacles.value = data;
     selectedId.value = data[0]?.id ?? null;
+  } catch {
+    error.value = 'Obstakels ophalen is mislukt. Controleer of de backend draait en vernieuw de pagina.';
   } finally {
     isLoading.value = false;
   }
@@ -45,10 +48,15 @@ async function handleDelete(id) {
   );
   if (!confirmed) return;
 
-  await obstacleRepository.delete(id);
-  obstacles.value = obstacles.value.filter((o) => o.id !== id);
-  if (selectedId.value === id) {
-    selectedId.value = null;
+  error.value = '';
+  try {
+    await obstacleRepository.delete(id);
+    obstacles.value = obstacles.value.filter((o) => o.id !== id);
+    if (selectedId.value === id) {
+      selectedId.value = null;
+    }
+  } catch {
+    error.value = 'Verwijderen is mislukt. Probeer het opnieuw.';
   }
 }
 </script>
@@ -67,11 +75,13 @@ async function handleDelete(id) {
       </p>
     </header>
 
+    <p v-if="error" role="alert" class="mb-4 text-sm text-[#B42318]">{{ error }}</p>
+
     <div
       v-if="isLoading"
       class="rounded-xl border border-[#E5E5E0] bg-white p-12 text-center text-sm text-[#646660]"
     >
-      Locaties laden uit lokale SQLite-database...
+      Locaties laden...
     </div>
 
     <div v-else class="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
