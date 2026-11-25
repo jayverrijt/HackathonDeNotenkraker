@@ -1,0 +1,247 @@
+{
+  "profile": "phone-2023-mid",
+  "profile_settings": {
+    "name": "phone-2023-mid",
+    "det_model": "models/yolo26n.pt",
+    "seg_model": "models/yolo26s-sem.pt",
+    "tracker": "bytetrack.yaml",
+    "camera_index": 0,
+    "camera_width": 1280,
+    "camera_height": 720,
+    "camera_fps": 30.0,
+    "capture_width": 640,
+    "capture_height": 360,
+    "capture_fps": 15.0,
+    "det_size": 480,
+    "seg_size": 320,
+    "det_fps": 4.0,
+    "seg_fps": 1.0,
+    "confidence": 0.4,
+    "centre_left": 0.35,
+    "centre_right": 0.65,
+    "lower_region_top": 0.55,
+    "alert_cooldown": 5.0,
+    "alert_global_cooldown": 3.0,
+    "tts_mode": "stub",
+    "tts_language": "en",
+    "tts_start_latency": 0.15,
+    "tts_wpm": 175.0,
+    "tts_volume": 1.0,
+    "close_centre_left": 0.15,
+    "close_centre_right": 0.85,
+    "close_bottom_ratio": 0.75,
+    "close_area_ratio": 0.03,
+    "close_immediate_bottom": 0.9,
+    "close_immediate_area": 0.08,
+    "close_persist_frames": 2,
+    "close_cooldown": 4.0,
+    "curb_cooldown": 20.0,
+    "curb_side_min": 0.4,
+    "curb_road_min": 0.2,
+    "curb_center_side_min": 0.35,
+    "curb_center_road_min": 0.5,
+    "scene_min_fraction": 0.22,
+    "scene_cooldown": 20.0,
+    "scene_quiet_after_alert": 2.0,
+    "threads": 4,
+    "interop_threads": 1,
+    "cv_threads": 2,
+    "cpu_affinity_count": 6,
+    "slowdown": 2.0,
+    "thermal_after_s": 180.0,
+    "thermal_slowdown": 1.25,
+    "rss_soft_mb": 1000.0,
+    "rss_hard_mb": 1400.0,
+    "show_window": false,
+    "show_segmentation": true,
+    "render_fps": 30.0,
+    "min_det_fps": 3.5,
+    "min_seg_fps": 0.8,
+    "max_camera_alert_p95_ms": 600.0
+  },
+  "started_at": 1795528578.200166,
+  "stages": {
+    "frame_age_ms": {
+      "count": 228,
+      "mean_ms": 37.66,
+      "p50_ms": 41.77,
+      "p95_ms": 72.89,
+      "p99_ms": 74.51,
+      "max_ms": 76.96
+    },
+    "detect_compute_ms": {
+      "count": 228,
+      "mean_ms": 27.88,
+      "p50_ms": 26.5,
+      "p95_ms": 32.45,
+      "p99_ms": 38.07,
+      "max_ms": 175.12
+    },
+    "detect_sim_ms": {
+      "count": 228,
+      "mean_ms": 55.75,
+      "p50_ms": 52.99,
+      "p95_ms": 64.89,
+      "p99_ms": 76.14,
+      "max_ms": 350.25
+    },
+    "alert_ms": {
+      "count": 228,
+      "mean_ms": 0.07,
+      "p50_ms": 0.07,
+      "p95_ms": 0.11,
+      "p99_ms": 0.13,
+      "max_ms": 0.22
+    },
+    "tts_start_latency_ms": {
+      "count": 28,
+      "mean_ms": 158.1,
+      "p50_ms": 157.6,
+      "p95_ms": 164.46,
+      "p99_ms": 164.77,
+      "max_ms": 164.84
+    },
+    "camera_to_alert_ms": {
+      "count": 28,
+      "mean_ms": 269.11,
+      "p50_ms": 251.54,
+      "p95_ms": 361.61,
+      "p99_ms": 480.96,
+      "max_ms": 523.16
+    },
+    "detect_interval_ms": {
+      "count": 227,
+      "mean_ms": 262.94,
+      "p50_ms": 263.03,
+      "p95_ms": 265.29,
+      "p99_ms": 265.66,
+      "max_ms": 602.25
+    },
+    "seg_compute_ms": {
+      "count": 57,
+      "mean_ms": 33.13,
+      "p50_ms": 32.93,
+      "p95_ms": 38.81,
+      "p99_ms": 41.31,
+      "max_ms": 41.79
+    },
+    "seg_sim_ms": {
+      "count": 57,
+      "mean_ms": 66.27,
+      "p50_ms": 65.85,
+      "p95_ms": 77.62,
+      "p99_ms": 82.63,
+      "max_ms": 83.58
+    },
+    "tts_duration_ms": {
+      "count": 28,
+      "mean_ms": 1713.63,
+      "p50_ms": 2039.4,
+      "p95_ms": 2758.36,
+      "p99_ms": 2911.84,
+      "max_ms": 2968.58
+    }
+  },
+  "counters": {
+    "detections_run": 228,
+    "alerts_generated": 40,
+    "seg_skipped": 1,
+    "segmentation_run": 57,
+    "tts_spoken": 28,
+    "curb_warnings": 3,
+    "alerts_suppressed_cooldown": 164,
+    "close_warnings": 15,
+    "tts_dropped_low_priority": 12,
+    "alerts_not_queued": 12,
+    "alerts_suppressed_global": 3,
+    "tts_interrupted": 16,
+    "scene_descriptions": 1
+  },
+  "gauges": {
+    "det_load_ms": 71.71209994703531,
+    "seg_load_ms": 37.19990001991391,
+    "det_warmup_ms": 3255.0122998654842,
+    "seg_warmup_ms": 357.8459001146257,
+    "camera_source": "C:\\Users\\Dinand\\Downloads\\temp\\videos\\citywalk.mp4",
+    "camera_kind": "video",
+    "camera_source_resolution": "1920x1080",
+    "camera_source_fps": 30.0,
+    "camera_resolution": "640x360",
+    "camera_capture_fps": 15.0,
+    "camera_fps_nominal": 15.0,
+    "camera_frame_skip": 2,
+    "video_start_s": 0.0,
+    "video_loop": true,
+    "last_curb_confidence": 0.4470391993327773,
+    "last_scene_confidence": 0.5667328042328043,
+    "elapsed_s": 60.03018060000613,
+    "detection_fps": 3.7980895229886533,
+    "segmentation_fps": 0.9495223807471633,
+    "render_fps": 0.0,
+    "camera_fps": 14.992458643376263,
+    "camera_frames_captured": 900,
+    "camera_frames_read": 1800,
+    "camera_finished": false,
+    "process_cpu_percent": 657.2995800714943,
+    "camera_read_failures": 0,
+    "rss_baseline_mb": 237.01504,
+    "rss_peak_mb": 692.543488,
+    "rss_incremental_peak_mb": 455.528448,
+    "rss_end_mb": 512.262144,
+    "rss_soft_cap_exceeded": false,
+    "limits": {
+      "torch_threads": 4,
+      "torch_interop_threads": 1,
+      "cv_threads": 2,
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "models": {
+      "det_model": "C:\\Users\\Dinand\\Downloads\\temp\\models\\yolo26n.pt",
+      "seg_model": "C:\\Users\\Dinand\\Downloads\\temp\\models\\yolo26s-sem.pt",
+      "det_load_ms": 71.71209994703531,
+      "seg_load_ms": 37.19990001991391,
+      "det_warmup_ms": 3255.0122998654842,
+      "seg_warmup_ms": 357.8459001146257
+    },
+    "slowdown_base": 2.0,
+    "slowdown_thermal_active": false,
+    "slowdown_total_slept_s": 8.24,
+    "detection_slots_missed_pct": 0.0
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": {
+      "detection_fps": {
+        "actual": 3.8,
+        "threshold": 3.5,
+        "unit": "",
+        "ok": true
+      },
+      "segmentation_fps": {
+        "actual": 0.95,
+        "threshold": 0.8,
+        "unit": "",
+        "ok": true
+      },
+      "camera_to_alert_p95_ms": {
+        "actual": 361.61,
+        "threshold": 600.0,
+        "unit": "",
+        "ok": true
+      },
+      "rss_peak_mb": {
+        "actual": 692.54,
+        "threshold": 1400.0,
+        "unit": "",
+        "ok": true
+      }
+    }
+  }
+}

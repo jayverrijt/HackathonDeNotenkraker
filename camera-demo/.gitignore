@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Large local test footage
+videos/*.mp4
+test_videos/*.mp4
+bench/results/*.mp4
